@@ -179,17 +179,17 @@ public class GameManager : MonoBehaviour
     {
         if (eventID == 1)
         {
-            Event1();
+            InflationEvent();
         }
 
         else if (eventID == 2)
         {
-            Event2();
+            TechAdvanceEvent();
         }
 
         else if (eventID == 3)
         {
-            Event3();
+            RaiseTaxes();
         }
 
         else if (eventID == 4)
@@ -290,21 +290,22 @@ public class GameManager : MonoBehaviour
         decisionsToday = 0;
         TriggerTimedEvents();
 
-        /*output all the required info (view code here) -> */ {
-            GameObject.Find("person 1").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[0].salary + " and opinion : " + people[0].opinion;
-            GameObject.Find("person 2").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[1].salary + " and opinion : " + people[1].opinion;
-            GameObject.Find("person 3").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[2].salary + " and opinion : " + people[2].opinion;
-            GameObject.Find("person 4").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[3].salary + " and opinion : " + people[3].opinion;
-            GameObject.Find("person 5").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[4].salary + " and opinion : " + people[4].opinion;
-            GameObject.Find("person 6").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[5].salary + " and opinion : " + people[5].opinion;
-            GameObject.Find("person 7").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[6].salary + " and opinion : " + people[6].opinion;
-            GameObject.Find("person 8").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[7].salary + " and opinion : " + people[7].opinion;
-            GameObject.Find("person 9").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[8].salary + " and opinion : " + people[8].opinion;
-            GameObject.Find("person 10").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[9].salary + " and opinion : " + people[9].opinion;
+        /*output all the required info (view code here) -> */
+        {
+            GameObject.Find("person 1").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[0].salary.ToString("#.##") + " and opinion : " + people[0].opinion.ToString("#.##");
+            GameObject.Find("person 2").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[1].salary.ToString("#.##") + " and opinion : " + people[1].opinion.ToString("#.##");
+            GameObject.Find("person 3").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[2].salary.ToString("#.##") + " and opinion : " + people[2].opinion.ToString("#.##");
+            GameObject.Find("person 4").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[3].salary.ToString("#.##") + " and opinion : " + people[3].opinion.ToString("#.##");
+            GameObject.Find("person 5").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[4].salary.ToString("#.##") + " and opinion : " + people[4].opinion.ToString("#.##");
+            GameObject.Find("person 6").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[5].salary.ToString("#.##") + " and opinion : " + people[5].opinion.ToString("#.##");
+            GameObject.Find("person 7").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[6].salary.ToString("#.##") + " and opinion : " + people[6].opinion.ToString("#.##");
+            GameObject.Find("person 8").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[7].salary.ToString("#.##") + " and opinion : " + people[7].opinion.ToString("#.##");
+            GameObject.Find("person 9").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[8].salary.ToString("#.##") + " and opinion : " + people[8].opinion.ToString("#.##");
+            GameObject.Find("person 10").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[9].salary.ToString("#.##") + " and opinion : " + people[9].opinion.ToString("#.##");
             GameObject.Find("decisions counter").GetComponentInChildren<Text>().text = "The number of decisions made today is : " + decisionsToday.ToString();
             GameObject.Find("day counter").GetComponentInChildren<Text>().text = "Today is day number : " + day.ToString();
-            GameObject.Find("total profit tracker").GetComponentInChildren<Text>().text = "The total profit accumulated is : " + totalProfit.ToString();
-            GameObject.Find("popularity tracker").GetComponentInChildren<Text>().text = "Your popularity is : " + popularity.ToString();
+            GameObject.Find("total profit tracker").GetComponentInChildren<Text>().text = "The total profit accumulated is : " + totalProfit.ToString("#.##");
+            GameObject.Find("popularity tracker").GetComponentInChildren<Text>().text = "Your popularity is : " + popularity.ToString("#.##");
         }
 
         CheckWinCondition();
@@ -364,21 +365,22 @@ public class GameManager : MonoBehaviour
             CalculatePopularity(); //update popularity
             decisionsToday += 1;
 
-            /*output all the required info (view code here) -> */ {
-                GameObject.Find("person 1").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[0].salary + " and opinion : " + people[0].opinion;
-                GameObject.Find("person 2").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[1].salary + " and opinion : " + people[1].opinion;
-                GameObject.Find("person 3").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[2].salary + " and opinion : " + people[2].opinion;
-                GameObject.Find("person 4").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[3].salary + " and opinion : " + people[3].opinion;
-                GameObject.Find("person 5").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[4].salary + " and opinion : " + people[4].opinion;
-                GameObject.Find("person 6").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[5].salary + " and opinion : " + people[5].opinion;
-                GameObject.Find("person 7").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[6].salary + " and opinion : " + people[6].opinion;
-                GameObject.Find("person 8").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[7].salary + " and opinion : " + people[7].opinion;
-                GameObject.Find("person 9").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[8].salary + " and opinion : " + people[8].opinion;
-                GameObject.Find("person 10").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[9].salary + " and opinion : " + people[9].opinion;
+            /*output all the required info (view code here) -> */
+            {
+                GameObject.Find("person 1").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[0].salary.ToString("#.##") + " and opinion : " + people[0].opinion.ToString("#.##");
+                GameObject.Find("person 2").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[1].salary.ToString("#.##") + " and opinion : " + people[1].opinion.ToString("#.##");
+                GameObject.Find("person 3").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[2].salary.ToString("#.##") + " and opinion : " + people[2].opinion.ToString("#.##");
+                GameObject.Find("person 4").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[3].salary.ToString("#.##") + " and opinion : " + people[3].opinion.ToString("#.##");
+                GameObject.Find("person 5").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[4].salary.ToString("#.##") + " and opinion : " + people[4].opinion.ToString("#.##");
+                GameObject.Find("person 6").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[5].salary.ToString("#.##") + " and opinion : " + people[5].opinion.ToString("#.##");
+                GameObject.Find("person 7").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[6].salary.ToString("#.##") + " and opinion : " + people[6].opinion.ToString("#.##");
+                GameObject.Find("person 8").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[7].salary.ToString("#.##") + " and opinion : " + people[7].opinion.ToString("#.##");
+                GameObject.Find("person 9").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[8].salary.ToString("#.##") + " and opinion : " + people[8].opinion.ToString("#.##");
+                GameObject.Find("person 10").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[9].salary.ToString("#.##") + " and opinion : " + people[9].opinion.ToString("#.##");
                 GameObject.Find("decisions counter").GetComponentInChildren<Text>().text = "The number of decisions made today is : " + decisionsToday.ToString();
                 GameObject.Find("day counter").GetComponentInChildren<Text>().text = "Today is day number : " + day.ToString();
-                GameObject.Find("total profit tracker").GetComponentInChildren<Text>().text = "The total profit accumulated is : " + totalProfit.ToString();
-                GameObject.Find("popularity tracker").GetComponentInChildren<Text>().text = "Your popularity is : " + popularity.ToString();
+                GameObject.Find("total profit tracker").GetComponentInChildren<Text>().text = "The total profit accumulated is : " + totalProfit.ToString("#.##");
+                GameObject.Find("popularity tracker").GetComponentInChildren<Text>().text = "Your popularity is : " + popularity.ToString("#.##");
             }
 
             //check if the day ticks over or not.
@@ -413,19 +415,34 @@ public class GameManager : MonoBehaviour
 
     //EVENTS
 
-    private void Event1()
+    private void InflationEvent()
     {
-        Debug.Log("test event 1 was called");
+        Debug.Log("inflation called");
+        foreach (Person p in people)
+        {
+            p.ChangeSalary(0.2f * p.salary);
+            p.ChangeOpinion(-0.5f);
+        }
     }
 
-    private void Event2()
+    private void TechAdvanceEvent()
     {
-        Debug.Log("test event 2 was called");
+        Debug.Log("TechAdvance was called");
+        foreach (Person p in people)
+        {
+            p.ChangeSalary(-0.25f * p.salary);
+            p.ChangeOpinion(0.5f);
+        }
     }
 
-    private void Event3()
+    private void RaiseTaxes()
     {
-        Debug.Log("test event 3 was called");
+        Debug.Log("RaiseTaxes was called");
+        taxRate += 0.05f;
+        foreach (Person p in people)
+        {
+            p.ChangeOpinion(-0.4f);
+        }
     }
 
     private void Event4()
@@ -489,7 +506,7 @@ public class GameManager : MonoBehaviour
         people = new List<Person>();
         popularity = 0f;
         totalProfit = 0f;
-        taxRate = 0.4f;
+        taxRate = 0.15f;
         day = 1;
         decisionsToday = 0;
         isGameOver = false;
@@ -507,9 +524,9 @@ public class GameManager : MonoBehaviour
         totalProfitDisplayText.gameObject.SetActive(false);
 
         //populate descriptions
-        eventDescriptions.Add("event1 : does event 1 stuff");
-        eventDescriptions.Add("event2 : does event 2 stuff");
-        eventDescriptions.Add("event3 : does event 3 stuff");
+        eventDescriptions.Add("Inflation : Cause a surge of increase in the amount of money in circulation, and potentially worry the public");
+        eventDescriptions.Add("Technological advancement : A new era of automation improves the quality of goods, services and quality of living, but saturates the job market");
+        eventDescriptions.Add("Raise taxes : Increase the reigonal tax rate");
         eventDescriptions.Add("event4 : does event 4 stuff");
         eventDescriptions.Add("event5 : does event 5 stuff");
         eventDescriptions.Add("event6 : does event 6 stuff");
@@ -521,21 +538,26 @@ public class GameManager : MonoBehaviour
         //make a new set of event IDs
         GenerateEventIDs();
 
+        //testing
+        ApplyEvent(3);
+        CalculatePopularity();
+        CollectTaxes();
+
         /*output all the required info (view code here) -> */ {
-            GameObject.Find("person 1").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[0].salary + " and opinion : " + people[0].opinion;
-            GameObject.Find("person 2").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[1].salary + " and opinion : " + people[1].opinion;
-            GameObject.Find("person 3").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[2].salary + " and opinion : " + people[2].opinion;
-            GameObject.Find("person 4").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[3].salary + " and opinion : " + people[3].opinion;
-            GameObject.Find("person 5").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[4].salary + " and opinion : " + people[4].opinion;
-            GameObject.Find("person 6").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[5].salary + " and opinion : " + people[5].opinion;
-            GameObject.Find("person 7").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[6].salary + " and opinion : " + people[6].opinion;
-            GameObject.Find("person 8").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[7].salary + " and opinion : " + people[7].opinion;
-            GameObject.Find("person 9").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[8].salary + " and opinion : " + people[8].opinion;
-            GameObject.Find("person 10").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[9].salary + " and opinion : " + people[9].opinion;
+            GameObject.Find("person 1").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[0].salary.ToString("#.##") + " and opinion : " + people[0].opinion.ToString("#.##");
+            GameObject.Find("person 2").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[1].salary.ToString("#.##") + " and opinion : " + people[1].opinion.ToString("#.##");
+            GameObject.Find("person 3").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[2].salary.ToString("#.##") + " and opinion : " + people[2].opinion.ToString("#.##");
+            GameObject.Find("person 4").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[3].salary.ToString("#.##") + " and opinion : " + people[3].opinion.ToString("#.##");
+            GameObject.Find("person 5").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[4].salary.ToString("#.##") + " and opinion : " + people[4].opinion.ToString("#.##");
+            GameObject.Find("person 6").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[5].salary.ToString("#.##") + " and opinion : " + people[5].opinion.ToString("#.##");
+            GameObject.Find("person 7").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[6].salary.ToString("#.##") + " and opinion : " + people[6].opinion.ToString("#.##");
+            GameObject.Find("person 8").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[7].salary.ToString("#.##") + " and opinion : " + people[7].opinion.ToString("#.##");
+            GameObject.Find("person 9").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[8].salary.ToString("#.##") + " and opinion : " + people[8].opinion.ToString("#.##");
+            GameObject.Find("person 10").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[9].salary.ToString("#.##") + " and opinion : " + people[9].opinion.ToString("#.##");
             GameObject.Find("decisions counter").GetComponentInChildren<Text>().text = "The number of decisions made today is : " + decisionsToday.ToString();
             GameObject.Find("day counter").GetComponentInChildren<Text>().text = "Today is day number : " + day.ToString();
-            GameObject.Find("total profit tracker").GetComponentInChildren<Text>().text = "The total profit accumulated is : " + totalProfit.ToString();
-            GameObject.Find("popularity tracker").GetComponentInChildren<Text>().text = "Your popularity is : " + popularity.ToString();
+            GameObject.Find("total profit tracker").GetComponentInChildren<Text>().text = "The total profit accumulated is : " + totalProfit.ToString("#.##");
+            GameObject.Find("popularity tracker").GetComponentInChildren<Text>().text = "Your popularity is : " + popularity.ToString("#.##");
         }
 
     }

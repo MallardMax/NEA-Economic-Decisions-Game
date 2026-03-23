@@ -4,13 +4,13 @@ using System.Collections.Generic;
 public class Person
 {
     //attributes of person with getters and setters
-    public int salary { get; private set; }
+    public float salary { get; private set; }
     public float opinion { get; private set; }
 
     //methods
 
     //constructor here
-    public Person(int salary, float opinion)
+    public Person(float salary, float opinion)
     {
         this.salary = salary;
         ValidateSalary(salary);
@@ -20,7 +20,7 @@ public class Person
     }
 
     //methods to change salary and opinion indirectly 
-    public void ChangeSalary(int amount)
+    public void ChangeSalary(float amount)
     {
          salary = salary + amount;
         ValidateSalary(salary);
@@ -33,7 +33,7 @@ public class Person
     }
 
     //methods to make sure that person attributes cant take certain values
-    private void ValidateSalary(int salaryToBeValidated)
+    private void ValidateSalary(float salaryToBeValidated)
     { 
       if (salaryToBeValidated < 0) 
       {
