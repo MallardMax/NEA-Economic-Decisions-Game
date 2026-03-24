@@ -331,7 +331,7 @@ public class GameManager : MonoBehaviour
 
     private void CheckWinCondition()
     {
-        if (day == 3)
+        if (day == 31)
         {
             isGameOver = true;
             highScore = totalProfit;
@@ -403,6 +403,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //buttons
+
     public void eventButtonAClicked()
     {
         ProcessDecision(eventID_A);
@@ -411,6 +413,12 @@ public class GameManager : MonoBehaviour
     public void eventButtonBClicked()
     {
         ProcessDecision(eventID_B);
+    }
+
+    public void QuitGame()
+    { //see method name
+        Debug.Log("the quit game method was called");
+        Application.Quit();
     }
 
     //EVENTS
@@ -492,7 +500,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("complex behaiviour for day 1 of event 7 was called");
     }
 
-
     private void Event8()
     {
         Debug.Log("test event 8 was called");
@@ -539,9 +546,8 @@ public class GameManager : MonoBehaviour
         GenerateEventIDs();
 
         //testing
-        ApplyEvent(3);
-        CalculatePopularity();
-        CollectTaxes();
+        day = 31;
+        CheckWinCondition();
 
         /*output all the required info (view code here) -> */ {
             GameObject.Find("person 1").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[0].salary.ToString("#.##") + " and opinion : " + people[0].opinion.ToString("#.##");
