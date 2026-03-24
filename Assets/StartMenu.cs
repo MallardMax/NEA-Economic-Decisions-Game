@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement; // this just loads the unity libraries requir
 
 public class StartMenu : MonoBehaviour {
 
-    public void playGame () { //this function loads the difficulty screen, and closes the current scene
+    public void playGame () { //this function loads the main panel screen, and closes the current scene
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainPanel");
     }
 

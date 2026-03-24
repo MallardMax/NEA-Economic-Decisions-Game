@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
 
         else if (callType == true)
         {
-            totalProfit += newTotalProfit;
+            totalProfit = totalProfit + newTotalProfit;
             ValidateTotalProfit(totalProfit);
         }
 
@@ -194,27 +194,27 @@ public class GameManager : MonoBehaviour
 
         else if (eventID == 4)
         {
-            Event4();
+            PublicServices();
         }
 
         else if (eventID == 5)
         {
-            Event5();
+            PublicSpeech();
         }
 
         else if (eventID == 6)
         {
-            Event6();
+            EconomicShift();
         }
 
         else if (eventID == 7)
         {
-            Event7();
+            TaxHaven();
         }
 
         else if (eventID == 8)
         {
-            Event8();
+            TaxReform();
         }
 
         else
@@ -429,7 +429,7 @@ public class GameManager : MonoBehaviour
         foreach (Person p in people)
         {
             p.ChangeSalary(0.2f * p.salary);
-            p.ChangeOpinion(-0.5f);
+            p.ChangeOpinion(-1f);
         }
     }
 
@@ -453,56 +453,120 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Event4()
+    private void PublicServices()
     {
-        Debug.Log("test event 4 was called");
+        Debug.Log("Invest in public services was called");
+        foreach (Person p in people)
+        {
+            p.ChangeOpinion(0.5f + (0.2f*p.opinion));
+        }
+        ChangeTotalProfit(-500000, true);
     }
 
-    private void Event5()
+    private void PublicSpeech()
     {
-        Debug.Log("test event 5 was called");
+        Debug.Log("public speech was called");
+        int random = Random.Range(1, people.Count + 1);
+        int counter = 1;
+        foreach (Person p in people)
+        {
+            if (counter <= random)
+            {
+                p.ChangeOpinion(0.3f*p.opinion);
+                counter += 1;
+            }
+
+            else
+            {
+                p.ChangeOpinion(-0.3f * p.opinion);
+            }
+        }
     }
 
-    private void Event6()
+    private void EconomicShift()
     {
         Debug.Log("test event 6 was called");
+        complexEventsActive.Enqueue(6); // the event id is 6 because these effects are caused by event 6
+        complexEventsDaysRemaining.Enqueue(2);//the number of days remaining is 2, because event 6 lasts 2 days
     }
 
     private void ComplexEvent6_day2()
     {
-        Debug.Log("complex behaiviour for day 2 of event 6 was called");
+        Debug.Log("complex behaiviour for day 2 of economic shift was called");
+        int random = Random.Range(40000, 200001);
+        ChangeTotalProfit(random, true);
     }
 
     private void ComplexEvent6_day1()
     {
-        Debug.Log("complex behaiviour for day 1 of event 6 was called");
+        Debug.Log("complex behaiviour for day 1 of economic shift was called");
+        foreach (Person p in people)
+        {
+            if (totalProfit > 500000)
+            {
+                p.ChangeSalary(0.2f*p.salary);
+            }
+
+            else
+            {
+                p.ChangeSalary(-0.2f * p.salary);
+            }
+        }
     }
 
-    private void Event7()
+    private void TaxHaven()
     {
-        Debug.Log("test event 7 was called, adding behaviour to queue");
+        Debug.Log("tax haven was called, adding behaviour to queue");
         complexEventsActive.Enqueue(7); // the event id is 7 because these effects are caused by event 7
         complexEventsDaysRemaining.Enqueue(3);//the number of days remaining is 3, because event 7 lasts 3 days
     }
 
     private void ComplexEvent7_day3()
     {
-        Debug.Log("complex behaiviour for day 3 of event 7 was called");
+        Debug.Log("complex behaiviour for day 3 of tax haven was called");
+        ChangeTotalProfit(100000 + (0.05f*totalProfit), true); //increase is 100k plus 5 percent
     }
 
     private void ComplexEvent7_day2()
     {
-        Debug.Log("complex behaiviour for day 2 of event 7 was called");
+        Debug.Log("complex behaiviour for day 2 of tax haven was called");
+        ChangeTotalProfit(150000 + (0.1f * totalProfit), true); //increase is 150k plus 10 percent
     }
 
     private void ComplexEvent7_day1()
     {
-        Debug.Log("complex behaiviour for day 1 of event 7 was called");
+        Debug.Log("complex behaiviour for day 1 of tax haven was called");
+        foreach (Person p in people)
+        {
+            float theConsequencesOfYourActions = 0.5f + ((0.1f * totalProfit)/100000);
+            p.ChangeOpinion(-theConsequencesOfYourActions);
+            //decrease is 0.2 plus some preportion of the money you made (approximately)
+        }
     }
 
-    private void Event8()
+    private void TaxReform()
     {
-        Debug.Log("test event 8 was called");
+        Debug.Log("Tax Reform was called");
+        float upperBracket = 15000;
+        float lowerBracket = 6000;
+
+        foreach (Person p in people)
+        {
+            if (p.salary >= upperBracket)
+            {
+                p.ChangeOpinion(-2f);
+            }
+
+            else if (p.salary >= lowerBracket & p.salary < upperBracket)
+            {
+                p.ChangeOpinion(-0.2f);
+            }
+
+            else
+            {
+                p.ChangeOpinion(1f);
+            }
+        }
     } 
 
     void Start() 
@@ -511,7 +575,7 @@ public class GameManager : MonoBehaviour
 
         //initialise values
         people = new List<Person>();
-        popularity = 0f;
+        popularity = 5f;
         totalProfit = 0f;
         taxRate = 0.15f;
         day = 1;
@@ -534,22 +598,19 @@ public class GameManager : MonoBehaviour
         eventDescriptions.Add("Inflation : Cause a surge of increase in the amount of money in circulation, and potentially worry the public");
         eventDescriptions.Add("Technological advancement : A new era of automation improves the quality of goods, services and quality of living, but saturates the job market");
         eventDescriptions.Add("Raise taxes : Increase the reigonal tax rate");
-        eventDescriptions.Add("event4 : does event 4 stuff");
-        eventDescriptions.Add("event5 : does event 5 stuff");
-        eventDescriptions.Add("event6 : does event 6 stuff");
-        eventDescriptions.Add("event7 : does event 7 stuff");
-        eventDescriptions.Add("event8 : does event 8 stuff");
+        eventDescriptions.Add("Invest in public services : Spend more money to improve the public services in the city greatly");
+        eventDescriptions.Add("Perform a speech : Speak your mind to the public; but remember, different things for different people");
+        eventDescriptions.Add("Economic shift : an influx of buisness hits the town, for good or for bad? Up to you to find out");
+        eventDescriptions.Add("Offshore tax haven : Attempt to circumvent the system for IMMENSE riches, but the truth will come out eventually");
+        eventDescriptions.Add("Tax reform : tax the rich more heavily than the poor, and alter their thoughts on you respectively");
         //initialise population
         CreatePopulation(10);
 
         //make a new set of event IDs
         GenerateEventIDs();
 
-        //testing
-        day = 31;
-        CheckWinCondition();
-
-        /*output all the required info (view code here) -> */ {
+        /*output all the required info (view code here) -> */
+        {
             GameObject.Find("person 1").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[0].salary.ToString("#.##") + " and opinion : " + people[0].opinion.ToString("#.##");
             GameObject.Find("person 2").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[1].salary.ToString("#.##") + " and opinion : " + people[1].opinion.ToString("#.##");
             GameObject.Find("person 3").GetComponentInChildren<Text>().text = "This person has a salary of : " + people[2].salary.ToString("#.##") + " and opinion : " + people[2].opinion.ToString("#.##");
